@@ -1,5 +1,5 @@
 # DB resource leak demo
-import psycopg2
+#import psycopg2
 
 def test_connection():
     connection = psycopg2.connect(user="postgres",
@@ -42,3 +42,7 @@ class Example:
 # Recursion stack overflow
 def fib(n):
     return fib(n-1) + fib(n-2)
+
+
+if __name__ == "__main__":
+    fib(1000)
