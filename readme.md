@@ -1,6 +1,9 @@
-AWS CODE GURU POC
+## AWS CODE GURU POC
 
 
-AWS services usage
-Race condition
-Resource leak
+#### Samples
+* Basic review
+* AWS services
+* Race condition
+* Resource leak
+* Sensitive information leak 
