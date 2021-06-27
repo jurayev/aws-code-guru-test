@@ -3,7 +3,7 @@
 
 #### Samples
 * Basic review
-* AWS services
+* AWS SDK
 * Race condition
 * Resource leak
 * Sensitive information leak 
