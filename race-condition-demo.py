@@ -1,6 +1,9 @@
-from threading import Thread
+from threading import Thread, Lock
 
 x = 1 # Shared resource
+
+# Initialize an instance of object Lock
+lock_race = Lock()
 
 
 def fibonaci(n):
@@ -10,18 +13,26 @@ def fibonaci(n):
 
 def firstFibonaci():
     global x
-    print("firstFibonaci resource is {} \n".format(x) )
-    while x <= 10:
-        print(fibonaci(x))
-        x+=1
+    try:
+        lock_race.acquire() # Graph a lock
+        print("firstFibonaci resource is {} \n".format(x) )
+        while x <= 10:
+            print(fibonaci(x))
+            x+=1
+    finally:
+        print("Done!")
 
 
 def secondFibonaci():
     global x
-    print("secondFibonaci resource is {} \n".format(x) )
-    while x <= 10:
-        print(fibonaci(x))
-        x+=1
+    try:
+        print("secondFibonaci resource is {} \n".format(x) )
+        while x <= 10:
+            print(fibonaci(x))
+            x+=1
+    finally:
+        lock_race.release()
+        print("Done!")
 
 
 if __name__ == "__main__":
