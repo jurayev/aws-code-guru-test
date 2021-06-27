@@ -1,6 +1,5 @@
 # DB resource leak demo
 import psycopg2
-from psycopg2 import Error
 
 def test_connection():
     connection = psycopg2.connect(user="postgres",
@@ -11,26 +10,6 @@ def test_connection():
     cursor = connection.cursor()
     cursor.execute("SELECT version();")
     record = cursor.fetchone()
-
-
-def test_connection_expected():
-    try:
-        connection = psycopg2.connect(user="postgres",
-                                      password="postgres123",
-                                      host="127.0.0.1",
-                                      port="5432",
-                                      database="postgres_db")
-
-        cursor = connection.cursor()
-        cursor.execute("SELECT version();")
-        record = cursor.fetchone()
-    except (Exception, Error) as error:
-        print("Error while connecting to PostgreSQL", error)
-    finally:
-        if (connection):
-            cursor.close()
-            connection.close()
-            print("PostgreSQL connection is closed")
 
 # File resource leak demo
 def read_write_data(data):
